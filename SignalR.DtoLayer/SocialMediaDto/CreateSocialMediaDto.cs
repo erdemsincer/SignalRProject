@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalR.DtoLayer.AboutDto
+namespace SignalR.DtoLayer.SocialMediaDto
 {
-    public class CreateAboutDto
+    public class CreateSocialMediaDto
     {
         public string Title { get; set; }
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
+        public string Url { get; set; }
+        public string İcon { get; set; }
     }
 }
