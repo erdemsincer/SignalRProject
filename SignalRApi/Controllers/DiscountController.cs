@@ -25,7 +25,7 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateDiscount(CreateDiscountDto createDiscountDto)
         {
-            Discount about = new Discount()
+            Discount discount = new Discount()
             {
                 Amount = createDiscountDto.Amount,
                 Description = createDiscountDto.Description,
@@ -33,13 +33,13 @@ namespace SignalRApi.Controllers
                 ImageUrl = createDiscountDto.ImageUrl
 
             };
-            _discountService.TAdd(about);
+            _discountService.TAdd(discount);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
-            Discount about = new Discount()
+            Discount discount = new Discount()
             {
                 DiscountId = updateDiscountDto.DiscountId,
                 Amount = updateDiscountDto.Amount,
@@ -48,7 +48,7 @@ namespace SignalRApi.Controllers
                 ImageUrl = updateDiscountDto.ImageUrl
             };
 
-            _discountService.TUpdate(about);
+            _discountService.TUpdate(discount);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

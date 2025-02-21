@@ -25,7 +25,7 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
-            Product about = new Product()
+            Product product = new Product()
             {
                 Description = createProductDto.Description,
                 ImageUrl = createProductDto.ImageUrl,
@@ -36,13 +36,13 @@ namespace SignalRApi.Controllers
 
 
             };
-            _productService.TAdd(about);
+            _productService.TAdd(product);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
-            Product about = new Product()
+            Product product = new Product()
             {
                 ProductId = updateProductDto.ProductId,
                 Description = updateProductDto.Description,
@@ -53,7 +53,7 @@ namespace SignalRApi.Controllers
                 CategoryId = updateProductDto.CategoryId
             };
 
-            _productService.TUpdate(about);
+            _productService.TUpdate(product);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

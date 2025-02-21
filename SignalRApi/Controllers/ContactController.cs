@@ -25,7 +25,7 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateContact(CreateContactDto createContactDto)
         {
-            Contact about = new Contact()
+            Contact contact = new Contact()
             {
                 FooterDescription = createContactDto.FooterDescription,
                 Email = createContactDto.Email,
@@ -35,13 +35,13 @@ namespace SignalRApi.Controllers
 
 
             };
-            _contactService.TAdd(about);
+            _contactService.TAdd(contact);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDto updateContactDto)
         {
-            Contact about = new Contact()
+            Contact contact = new Contact()
             {
                 ContactId = updateContactDto.ContactId,
                 FooterDescription = updateContactDto.FooterDescription,
@@ -50,7 +50,7 @@ namespace SignalRApi.Controllers
                 Location = updateContactDto.Location
             };
 
-            _contactService.TUpdate(about);
+            _contactService.TUpdate(contact);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

@@ -27,30 +27,28 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            Category about = new Category()
+            Category category = new Category()
             {
                 Status = createCategoryDto.Status,
                 CategoryName = createCategoryDto.CategoryName
                 
 
             };
-            _categoryService.TAdd(about);
+            _categoryService.TAdd(category);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            Category about = new Category()
+            Category category = new Category()
             {
                 CategoryId = updateCategoryDto.CategoryId,
                 CategoryName = updateCategoryDto.CategoryName,
                 Status = updateCategoryDto.Status,
 
-
-
             };
 
-            _categoryService.TUpdate(about);
+            _categoryService.TUpdate(category);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

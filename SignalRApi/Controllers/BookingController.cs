@@ -24,7 +24,7 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
-            Booking about = new Booking()
+            Booking booking = new Booking()
             {
                 Date = createBookingDto.Date,
                 Email = createBookingDto.Email, 
@@ -32,13 +32,13 @@ namespace SignalRApi.Controllers
                 Phone = createBookingDto.Phone,
                 PersonCount = createBookingDto.PersonCount,
             };
-            _bookingService.TAdd(about);
+            _bookingService.TAdd(booking);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
-            Booking about = new Booking()
+            Booking booking = new Booking()
             {
                 BookingId = updateBookingDto.BookingId,
                 Date = updateBookingDto.Date,
@@ -48,7 +48,7 @@ namespace SignalRApi.Controllers
                 PersonCount = updateBookingDto.PersonCount,
             };
 
-            _bookingService.TUpdate(about);
+            _bookingService.TUpdate(booking);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

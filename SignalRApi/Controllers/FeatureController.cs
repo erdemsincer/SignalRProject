@@ -25,7 +25,7 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateFeature(CreateFeatureDto createFeatureDto)
         {
-            Feature about = new Feature()
+            Feature feature = new Feature()
             {
                 Description1 = createFeatureDto.Description1,
                 Description2 = createFeatureDto.Description2,
@@ -36,13 +36,13 @@ namespace SignalRApi.Controllers
 
 
             };
-            _featureService.TAdd(about);
+            _featureService.TAdd(feature);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateFeature(UpdateFeatureDto updateFeatureDto)
         {
-            Feature about = new Feature()
+            Feature feature = new Feature()
             {
                 FeatureId = updateFeatureDto.FeatureId,
                 Description1 = updateFeatureDto.Description1,
@@ -53,7 +53,7 @@ namespace SignalRApi.Controllers
                 Title3 = updateFeatureDto.Title3
             };
 
-            _featureService.TUpdate(about);
+            _featureService.TUpdate(feature);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

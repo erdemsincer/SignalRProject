@@ -3,6 +3,7 @@ using SignalR.BusinessLayer.Concrete;
 using SignalR.DataAccessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.DataAccessLayer.EntityFramework;
+using System.Collections.Concurrent;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SignalRContext>();
@@ -18,6 +19,10 @@ builder.Services.AddScoped<IContactService, ContactManager>();
 builder.Services.AddScoped<IContactDal, EFContactDal>();
 builder.Services.AddScoped<IFeatureService, FeatureManager>();
 builder.Services.AddScoped<IFeatureDal, EFFeatureDal>();
+builder.Services.AddScoped<IProductService, ProductManager>();
+builder.Services.AddScoped<IProductDal, EFProductDal>();
+builder.Services.AddScoped<ISocialMediaService, SocialMediaManager>();
+builder.Services.AddScoped<ISocialMediaDal, EFSocialMediaDal>();
 
 // Add services to the container.
 
