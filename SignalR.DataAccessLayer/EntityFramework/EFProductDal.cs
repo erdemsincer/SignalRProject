@@ -21,7 +21,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
         {
            var context = new SignalRContext();
            var values=context.Products.Include(x => x.Category).ToList();
-            return values;
+           return values;
         }
     }
 }
