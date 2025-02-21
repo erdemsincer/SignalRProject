@@ -10,6 +10,8 @@ builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IAboutDal, EFAboutDal>();
 builder.Services.AddScoped<IBookingService, BookingManager>();
 builder.Services.AddScoped<IBookingDal, EFBookingDal>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
 
 // Add services to the container.
 
