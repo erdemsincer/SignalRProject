@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.DiscountDto;
@@ -11,6 +12,12 @@ namespace SignalRApi.Controllers
     public class DiscountController : ControllerBase
     {
         private readonly IDiscountService _discountService;
+        private readonly IMapper _mapper;
+
+        public DiscountController(IMapper mapper)
+        {
+            _mapper = mapper;
+        }
 
         public DiscountController(IDiscountService discountService)
         {
@@ -25,30 +32,16 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateDiscount(CreateDiscountDto createDiscountDto)
         {
-            Discount discount = new Discount()
-            {
-                Amount = createDiscountDto.Amount,
-                Description = createDiscountDto.Description,
-                Title = createDiscountDto.Title,
-                ImageUrl = createDiscountDto.ImageUrl
-
-            };
-            _discountService.TAdd(discount);
+            var values = _mapper.Map<Discount>(createDiscountDto);
+            _discountService.TAdd(values);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
-            Discount discount = new Discount()
-            {
-                DiscountId = updateDiscountDto.DiscountId,
-                Amount = updateDiscountDto.Amount,
-                Description = updateDiscountDto.Description,
-                Title = updateDiscountDto.Title,
-                ImageUrl = updateDiscountDto.ImageUrl
-            };
+            var values = _mapper.Map<Discount>(updateDiscountDto);
 
-            _discountService.TUpdate(discount);
+            _discountService.TUpdate(values);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

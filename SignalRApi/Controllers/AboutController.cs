@@ -12,12 +12,13 @@ namespace SignalRApi.Controllers
     public class AboutController : ControllerBase
     {
         private readonly IAboutService _aboutService;
-      
+        private readonly IMapper _mapper;
 
-        public AboutController(IAboutService aboutService)
+
+        public AboutController(IAboutService aboutService, IMapper mapper)
         {
             _aboutService = aboutService;
-           
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult AboutList()
@@ -28,27 +29,16 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateAbout(CreateAboutDto createAboutDto)
         {
-            About about = new About()
-            {
-                Title = createAboutDto.Title,
-                Description = createAboutDto.Description,
-                ImageUrl = createAboutDto.ImageUrl
-            };
-            _aboutService.TAdd(about);
+           var values = _mapper.Map<About>(createAboutDto);
+            _aboutService.TAdd(values);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
         {
-            About about = new About()
-            {
-                AboutId = updateAboutDto.AboutId,
-                Title = updateAboutDto.Title,
-                Description = updateAboutDto.Description,
-                ImageUrl = updateAboutDto.ImageUrl
-            };
+            var values = _mapper.Map<About>(updateAboutDto);
 
-            _aboutService.TUpdate(about);
+            _aboutService.TUpdate(values);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

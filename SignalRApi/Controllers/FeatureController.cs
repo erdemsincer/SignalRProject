@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.FeatureDto;
@@ -11,6 +12,7 @@ namespace SignalRApi.Controllers
     public class FeatureController : ControllerBase
     {
         private readonly IFeatureService _featureService;
+        private readonly IMapper _mapper;
 
         public FeatureController(IFeatureService featureService)
         {

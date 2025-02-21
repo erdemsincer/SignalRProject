@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.ProductDto;
@@ -11,10 +12,12 @@ namespace SignalRApi.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult ProductList()
@@ -25,35 +28,16 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
-            Product product = new Product()
-            {
-                Description = createProductDto.Description,
-                ImageUrl = createProductDto.ImageUrl,
-                ProductName = createProductDto.ProductName,
-                Price = createProductDto.Price,
-                ProductStatus = createProductDto.ProductStatus,
-                CategoryId = createProductDto.CategoryId
-
-
-            };
-            _productService.TAdd(product);
+            var values = _mapper.Map<Product>(createProductDto);
+            _productService.TAdd(values);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
-            Product product = new Product()
-            {
-                ProductId = updateProductDto.ProductId,
-                Description = updateProductDto.Description,
-                ImageUrl = updateProductDto.ImageUrl,
-                ProductName = updateProductDto.ProductName,
-                Price = updateProductDto.Price,
-                ProductStatus = updateProductDto.ProductStatus,
-                CategoryId = updateProductDto.CategoryId
-            };
+            var values = _mapper.Map<Product>(updateProductDto);
 
-            _productService.TUpdate(product);
+            _productService.TUpdate(values);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

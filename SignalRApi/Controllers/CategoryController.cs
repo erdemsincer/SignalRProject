@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Abstract;
@@ -12,10 +13,12 @@ namespace SignalRApi.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -27,28 +30,16 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            Category category = new Category()
-            {
-                Status = createCategoryDto.Status,
-                CategoryName = createCategoryDto.CategoryName
-                
-
-            };
-            _categoryService.TAdd(category);
+            var values = _mapper.Map<Category>(createCategoryDto);
+            _categoryService.TAdd(values);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
-            Category category = new Category()
-            {
-                CategoryId = updateCategoryDto.CategoryId,
-                CategoryName = updateCategoryDto.CategoryName,
-                Status = updateCategoryDto.Status,
+            var values=_mapper.Map<Category>(updateCategoryDto);
 
-            };
-
-            _categoryService.TUpdate(category);
+            _categoryService.TUpdate(values);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

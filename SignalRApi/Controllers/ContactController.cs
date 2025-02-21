@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.ContactDto;
@@ -11,10 +12,12 @@ namespace SignalRApi.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IContactService _contactService;
+        private readonly IMapper _mapper;
 
-        public ContactController(IContactService contactService)
+        public ContactController(IContactService contactService, IMapper mapper)
         {
             _contactService = contactService;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult ContactList()
@@ -25,32 +28,16 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateContact(CreateContactDto createContactDto)
         {
-            Contact contact = new Contact()
-            {
-                FooterDescription = createContactDto.FooterDescription,
-                Email = createContactDto.Email,
-                Phone = createContactDto.Phone,
-                Location = createContactDto.Location
-
-
-
-            };
-            _contactService.TAdd(contact);
+           var values = _mapper.Map<Contact>(createContactDto);
+            _contactService.TAdd(values);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDto updateContactDto)
         {
-            Contact contact = new Contact()
-            {
-                ContactId = updateContactDto.ContactId,
-                FooterDescription = updateContactDto.FooterDescription,
-                Email = updateContactDto.Email,
-                Phone = updateContactDto.Phone,
-                Location = updateContactDto.Location
-            };
+            var values = _mapper.Map<Contact>(updateContactDto);
 
-            _contactService.TUpdate(contact);
+            _contactService.TUpdate(values);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

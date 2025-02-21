@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.TestimonialDto;
 using SignalR.EntityLayer.Entities;
@@ -10,10 +11,12 @@ namespace SignalRApi.Controllers
     public class TestimonialController : ControllerBase
     {
         private readonly ITestimonialService _testimonialService;
+        private readonly IMapper _mapper;
 
-        public TestimonialController(ITestimonialService testimonialService)
+        public TestimonialController(ITestimonialService testimonialService, IMapper mapper)
         {
             _testimonialService = testimonialService;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult TestimonialList()
@@ -24,31 +27,16 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateTestimonial(CreateTestimonialDto createTestimonialDto)
         {
-            Testimonial testimonial = new Testimonial()
-            {
-                Title = createTestimonialDto.Title,
-                Comment = createTestimonialDto.Comment,
-                Status = createTestimonialDto.Status,
-                Name = createTestimonialDto.Name,
-                ImageUrl = createTestimonialDto.ImageUrl
-            };
-            _testimonialService.TAdd(testimonial);
+           var values = _mapper.Map<Testimonial>(createTestimonialDto);
+            _testimonialService.TAdd(values);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
         {
-            Testimonial testimonial = new Testimonial()
-            {
-                TestimonialId = updateTestimonialDto.TestimonialId,
-                Title = updateTestimonialDto.Title,
-                Comment = updateTestimonialDto.Comment,
-                Status = updateTestimonialDto.Status,
-                Name = updateTestimonialDto.Name,
-                ImageUrl = updateTestimonialDto.ImageUrl
-            };
+           var values= _mapper.Map<Testimonial>(updateTestimonialDto);
 
-            _testimonialService.TUpdate(testimonial);
+            _testimonialService.TUpdate(values);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.BookingDto;
 using SignalR.EntityLayer.Entities;
@@ -10,10 +11,12 @@ namespace SignalRApi.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
+        private readonly IMapper _mapper;
 
-        public BookingController(IBookingService bookingService)
+        public BookingController(IBookingService bookingService, IMapper mapper)
         {
             _bookingService = bookingService;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult BookingList()
@@ -24,31 +27,16 @@ namespace SignalRApi.Controllers
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
-            Booking booking = new Booking()
-            {
-                Date = createBookingDto.Date,
-                Email = createBookingDto.Email, 
-                Name = createBookingDto.Name,
-                Phone = createBookingDto.Phone,
-                PersonCount = createBookingDto.PersonCount,
-            };
-            _bookingService.TAdd(booking);
+            var values = _mapper.Map<Booking>(createBookingDto);
+            _bookingService.TAdd(values);
             return Ok("eklendi");
         }
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
-            Booking booking = new Booking()
-            {
-                BookingId = updateBookingDto.BookingId,
-                Date = updateBookingDto.Date,
-                Email = updateBookingDto.Email,
-                Name = updateBookingDto.Name,
-                Phone = updateBookingDto.Phone,
-                PersonCount = updateBookingDto.PersonCount,
-            };
+            var values = _mapper.Map<Booking>(updateBookingDto);
 
-            _bookingService.TUpdate(booking);
+            _bookingService.TUpdate(values);
             return Ok("Güncellendi");
         }
         [HttpDelete("{id}")]
