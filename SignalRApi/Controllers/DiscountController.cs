@@ -14,14 +14,12 @@ namespace SignalRApi.Controllers
         private readonly IDiscountService _discountService;
         private readonly IMapper _mapper;
 
-        public DiscountController(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
 
-        public DiscountController(IDiscountService discountService)
+
+        public DiscountController(IDiscountService discountService, IMapper mapper)
         {
             _discountService = discountService;
+            _mapper = mapper;
         }
         [HttpGet]
         public IActionResult DiscountList()
