@@ -26,23 +26,41 @@ namespace SignalR.DataAccessLayer.EntityFramework
 
 		public int ProductCount()
 		{
-            var context = new SignalRContext();
+			using var context = new SignalRContext();
             var values = context.Products.Count();
             return values;
 		}
 
 		public int ProductCountByCategoryNameDrink()
 		{
-			var context = new SignalRContext();
+			using var context = new SignalRContext();
 
             return context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "İçecek").Select(z => z.CategoryId).FirstOrDefault())).Count();
 		}
 
 		public int ProductCountByCategoryNameHamburger()
 		{
-			var context = new SignalRContext();
+			using var context = new SignalRContext();
 			return context.Products.Where(x => x.CategoryId == (context.Categories.Where(y => y.CategoryName == "Hamburger").Select(z => z.CategoryId).FirstOrDefault())).Count();
 			
+		}
+
+		public string ProductNameByMaxPrice()
+		{
+			using var context = new SignalRContext();
+			return context.Products.Where(x => x.Price == (context.Products.Max(x => x.Price))).Select(z => z.ProductName).FirstOrDefault();
+		}
+
+		public string ProductNameByMinPrice()
+		{
+			using var context = new SignalRContext();
+			return context.Products.Where(x => x.Price == (context.Products.Min(x => x.Price))).Select(z => z.ProductName).FirstOrDefault();
+		}
+
+		public decimal ProductPriceAvg()
+		{
+			using var context = new SignalRContext();
+			return context.Products.Average(x => x.Price);
 		}
 	}
 }
