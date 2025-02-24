@@ -58,11 +58,18 @@ namespace SignalRApi.Controllers
 			_orderService.TDelete(value);
 			return Ok("Silindi");
 		}
+
 		[HttpGet("TotalOrderCount")]
 		public IActionResult TotalOrderCount()
 		{
 			var value = _orderService.TTotalOrderCount();
-			return Ok(value);	
+			return Ok(value);
+		}
+		[HttpGet("ActiveOrderCount")]
+		public IActionResult ActiveOrderCount()
+		{
+			var value = _orderService.TActiveOrderCount();
+			return Ok(value);
 		}
 	}
 }
