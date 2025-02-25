@@ -15,8 +15,8 @@
 
 				connection.start().then(() => {
 					$("#connstatus").text(connection.state);
-					connection.invoke("SendCategoryCount");
-					connection.invoke("SendProductCount");
+					connection.invoke("SendStatistic");
+					
 				}).catch((err) => { console.log(err) });
 
 
@@ -27,6 +27,24 @@
 				connection.on("ReceiveProductCount", (value2) => {
 					$("#productcount").text(value2);
 				});
+				connection.on("ReceiveActiveCategoryCount", (value3) => {
+					$("#activecategorycount").text(value3);
+				});
+				connection.on("ReceivePassiveCategoryCount", (value4) => {
+					$("#passivecategorycount").text(value4);
+				});
+				connection.on("ReceiveProductCountByCategoryNameHamburgerCount", (value5) => {
+					$("#receiveproductcountbycategorynamehamburgercount").text(value5);
+				});
+				connection.on("ReceiveProductCountByCategoryNameDrinkCount", (value6) => {
+					$("#ReceiveProductCountByCategoryNameDrinkCount").text(value6);
+				});
+				connection.on("ReceiveProductPriceAvg", (value7) => {
+					$("#ReceiveProductPriceAvg").text(value7);
+				});
+				
+				
+				
 			})
 		</script>
 		<h4 class="page-title">Anlık İstatistik sayfası</h4>
@@ -80,8 +98,8 @@
 					</div>
 					<div class="col-7 d-flex align-items-center">
 						<div class="numbers">
-							<p class="card-category">Subscribers</p>
-							<h4 class="card-title">1303</h4>
+							<p class="card-category">Aktif Kategori Sayısı</p>
+									<h4 class="card-title" id="activecategorycount"></h4>
 						</div>
 					</div>
 				</div>
@@ -94,13 +112,13 @@
 				<div class="row">
 					<div class="col-5">
 						<div class="icon-big text-center">
-							<i class="la la-check-circle"></i>
+							<i class="la la-close"></i>
 						</div>
 					</div>
 					<div class="col-7 d-flex align-items-center">
 						<div class="numbers">
-							<p class="card-category">Order</p>
-							<h4 class="card-title">576</h4>
+							<p class="card-category">Pasif Kategori Sayısı</p>
+									<h4 class="card-title" id="passivecategorycount"></h4>
 						</div>
 					</div>
 				</div>
@@ -116,13 +134,13 @@
 						<div class="row">
 							<div class="col-5">
 								<div class="icon-big text-center">
-									<i class="la la-users"></i>
+									<i class="la la-support"></i>
 								</div>
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Visitors</p>
-									<h4 class="card-title">1,294</h4>
+									<p class="card-category">Hamburger Kategorisi</p>
+									<h4 class="card-title" id="receiveproductcountbycategorynamehamburgercount"></h4>
 								</div>
 							</div>
 						</div>
@@ -135,13 +153,13 @@
 						<div class="row">
 							<div class="col-5">
 								<div class="icon-big text-center">
-									<i class="la la-bar-chart"></i>
+									<i class="la la-umbrella"></i>
 								</div>
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Sales</p>
-									<h4 class="card-title">$ 1,345</h4>
+									<p class="card-category">İçecek sayısı</p>
+									<h4 class="card-title" id="ReceiveProductCountByCategoryNameDrinkCount"></h4>
 								</div>
 							</div>
 						</div>
@@ -154,13 +172,13 @@
 						<div class="row">
 							<div class="col-5">
 								<div class="icon-big text-center">
-									<i class="la la-newspaper-o"></i>
+									<i class="la la-money"></i>
 								</div>
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Subscribers</p>
-									<h4 class="card-title">1303</h4>
+									<p class="card-category">Ortalama Fiyat</p>
+									<h4 class="card-title" id="ReceiveProductPriceAvg"></h4>
 								</div>
 							</div>
 						</div>
@@ -173,13 +191,13 @@
 						<div class="row">
 							<div class="col-5">
 								<div class="icon-big text-center">
-									<i class="la la-check-circle"></i>
+									<i class="la la-close"></i>
 								</div>
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Order</p>
-									<h4 class="card-title">576</h4>
+									<p class="card-category">Pasif Kategori Sayısı</p>
+									<h4 class="card-title" id="passivecategorycount"></h4>
 								</div>
 							</div>
 						</div>
