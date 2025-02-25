@@ -71,5 +71,12 @@ namespace SignalRApi.Controllers
 			var value = _orderService.TActiveOrderCount();
 			return Ok(value);
 		}
+		[HttpGet("LastOrderPrice")]
+		public IActionResult LastOrderPrice()
+		{
+			var value = _orderService.TLastOrderPrice();
+			return Ok(value);
+		}
 	}
+	
 }
