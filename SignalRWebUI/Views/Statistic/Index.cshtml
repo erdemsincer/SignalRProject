@@ -48,6 +48,9 @@
 				connection.on("ReceiveProductNameByMinPrice", (value9) => {
 					$("#ReceiveProductNameByMinPrice").text(value9);
 				});
+				connection.on("ReceiveTotalOrderCount", (value10) => {
+					$("#ReceiveTotalOrderCount").text(value10);
+				});
 				
 				
 				
@@ -244,8 +247,8 @@
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Sales</p>
-									<h4 class="card-title">$ 1,345</h4>
+									<p class="card-category">ss</p>
+									<h4 class="card-title" id="ReceiveTotalOrderCount"></h4>
 								</div>
 							</div>
 						</div>

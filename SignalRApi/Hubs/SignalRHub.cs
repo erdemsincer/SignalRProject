@@ -8,11 +8,13 @@ namespace SignalRApi.Hubs
     {
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
+		private readonly IOrderService _orderService;
 
-		public SignalRHub(ICategoryService categoryService, IProductService productService)
+		public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService)
 		{
 			_categoryService = categoryService;
 			_productService = productService;
+			_orderService = orderService;
 		}
 
 
@@ -45,6 +47,9 @@ namespace SignalRApi.Hubs
 
 			var value9 = _productService.TProductNameByMinPrice();
 			await Clients.All.SendAsync("ReceiveProductNameByMinPrice", value9);
+
+			var value10 =  _orderService.TTotalOrderCount();
+			await Clients.All.SendAsync("ReceiveTotalOrderCount", value10);
 
 		}
 		
