@@ -78,6 +78,12 @@ namespace SignalRApi.Hubs
 			var value = _moneyCaseService.TTotalMoneyCaseAmount();
 			await Clients.All.SendAsync("ReciveTotalMoneyCaseAmount", value.ToString("0.00") + "TL");
 
+			var value2 = _orderService.TActiveOrderCount();
+			await Clients.All.SendAsync("ReceiveActiveOrderCount", value2);
+
+			var value3 = _menuTableService.TMenuTableCount();
+			await Clients.All.SendAsync("ReciveMenuTableCount", value3);
+
 		}
 
 	}

@@ -24,11 +24,16 @@
 
 
 				
-				connection.on("ReciveTotalMoneyCaseAmount", (value14) => {
-					$("#ReciveTotalMoneyCaseAmount").text(value14);
+				connection.on("ReciveTotalMoneyCaseAmount", (value) => {
+					$("#ReciveTotalMoneyCaseAmount").text(value);				
 				});
 
-
+				connection.on("ReceiveActiveOrderCount", (value1) => {
+					$("#ReceiveActiveOrderCount").text(value1);
+				});
+				connection.on("ReciveMenuTableCount", (value3) => {
+					$("#ReciveMenuTableCount").text(value3);
+				});
 
 
 			})
@@ -97,7 +102,7 @@
 	<div class="col-md-3">
 		<div class="card card-stats">
 			<div class="card-body">
-				<p class="fw-bold mt-1">Statistic</p>
+				<p class="fw-bold mt-1">İstatistik</p>
 				<div class="row">
 					<div class="col-5">
 						<div class="icon-big text-center icon-warning">
@@ -106,8 +111,8 @@
 					</div>
 					<div class="col-7 d-flex align-items-center">
 						<div class="numbers">
-							<p class="card-category">Number</p>
-							<h4 class="card-title">150GB</h4>
+							<p class="card-category">Aktif Sipariş</p>
+											<h4 class="card-title" id="ReceiveActiveOrderCount"></h4>
 						</div>
 					</div>
 				</div>
@@ -120,8 +125,8 @@
 					</div>
 					<div class="col-7 d-flex align-items-center">
 						<div class="numbers">
-							<p class="card-category">Followers</p>
-							<h4 class="card-title">+45K</h4>
+							<p class="card-category">Toplam Masa</p>
+											<h4 class="card-title" id="ReciveMenuTableCount"></h4>
 						</div>
 					</div>
 				</div>
