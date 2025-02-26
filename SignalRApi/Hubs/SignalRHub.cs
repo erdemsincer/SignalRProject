@@ -43,6 +43,9 @@ namespace SignalRApi.Hubs
 			var value8 = _productService.TProductNameByMaxPrice();
 			await Clients.All.SendAsync("ReceiveProductNameByMaxPrice", value8);
 
+			var value9 = _productService.TProductNameByMinPrice();
+			await Clients.All.SendAsync("ReceiveProductNameByMinPrice", value9);
+
 		}
 		
 	}

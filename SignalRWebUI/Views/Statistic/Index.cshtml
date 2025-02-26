@@ -45,6 +45,9 @@
 				connection.on("ReceiveProductNameByMaxPrice", (value8) => {
 					$("#ReceiveProductNameByMaxPrice").text(value8);
 				});
+				connection.on("ReceiveProductNameByMinPrice", (value9) => {
+					$("#ReceiveProductNameByMinPrice").text(value9);
+				});
 				
 				
 				
@@ -222,8 +225,8 @@
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Visitors</p>
-									<h4 class="card-title">1,294</h4>
+									<p class="card-category">En Düşük Ürün</p>
+									<h4 class="card-title" id="ReceiveProductNameByMinPrice"></h4>
 								</div>
 							</div>
 						</div>
