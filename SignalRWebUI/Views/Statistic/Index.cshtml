@@ -15,11 +15,13 @@
 
 				connection.start().then(() => {
 					$("#connstatus").text(connection.state);
-					connection.invoke("SendStatistic");
 					
+					setInterval(() => {
+						connection.invoke("SendStatistic");
+					}, 1000);
 				}).catch((err) => { console.log(err) });
 
-
+				
 				connection.on("ReceiveCategoryCount", (value) => {
 					$("#categorycount").text(value);
 				});
@@ -50,6 +52,15 @@
 				});
 				connection.on("ReceiveTotalOrderCount", (value10) => {
 					$("#ReceiveTotalOrderCount").text(value10);
+				});
+				connection.on("ReceiveActiveOrderCount", (value11) => {
+					$("#ReceiveActiveOrderCount").text(value11);
+				});
+				connection.on("ReceiveLastOrderPrice", (value12) => {
+					$("#ReceiveLastOrderPrice").text(value12);
+				});
+				connection.on("ReciveProductAvgPriceByHamburger", (value13) => {
+					$("#ReciveProductAvgPriceByHamburger").text(value13);
 				});
 				
 				
@@ -247,7 +258,7 @@
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">ss</p>
+									<p class="card-category">Toplam sipariş sayısı</p>
 									<h4 class="card-title" id="ReceiveTotalOrderCount"></h4>
 								</div>
 							</div>
@@ -261,13 +272,13 @@
 						<div class="row">
 							<div class="col-5">
 								<div class="icon-big text-center">
-									<i class="la la-newspaper-o"></i>
+									<i class="la la-lemon-o"></i>
 								</div>
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Subscribers</p>
-									<h4 class="card-title">1303</h4>
+									<p class="card-category">Aktif sipariş</p>
+									<h4 class="card-title" id="ReceiveActiveOrderCount"></h4>
 								</div>
 							</div>
 						</div>
@@ -280,13 +291,13 @@
 						<div class="row">
 							<div class="col-5">
 								<div class="icon-big text-center">
-									<i class="la la-check-circle"></i>
+									<i class="la la-heart"></i>
 								</div>
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Order</p>
-									<h4 class="card-title">576</h4>
+									<p class="card-category">Son Kazanç</p>
+									<h4 class="card-title" id="ReceiveLastOrderPrice"></h4>
 								</div>
 							</div>
 						</div>
@@ -307,8 +318,8 @@
 							</div>
 							<div class="col-7 d-flex align-items-center">
 								<div class="numbers">
-									<p class="card-category">Visitors</p>
-									<h4 class="card-title">1,294</h4>
+									<p class="card-category">Ortalama Hamburger</p>
+									<h4 class="card-title" id="ReciveProductAvgPriceByHamburger"></h4>
 								</div>
 							</div>
 						</div>

@@ -51,6 +51,15 @@ namespace SignalRApi.Hubs
 			var value10 =  _orderService.TTotalOrderCount();
 			await Clients.All.SendAsync("ReceiveTotalOrderCount", value10);
 
+			var value11 = _orderService.TActiveOrderCount();
+			await Clients.All.SendAsync("ReceiveActiveOrderCount", value11);
+
+			var value12 = _orderService.TLastOrderPrice();
+			await Clients.All.SendAsync("ReceiveLastOrderPrice", value12);
+
+			var value13 = _productService.TProductAvgPriceByHamburger();
+			await Clients.All.SendAsync("ReciveProductAvgPriceByHamburger", value13);
+
 		}
 		
 	}
